@@ -9,6 +9,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedPageIndex = 0;
+  final List<Widget> pages = [
+    HomeScreen(),
+    SettingsScreen(),
+  ];
+
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,23 +103,70 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXQrpJH5YofrmGgo0Ct_wDyYu36LzTwZKADw&s",
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          CachedNetworkImage(
-            imageUrl:
-                "https://www.nbc.com/sites/nbcblog/files/styles/scale_600/public/2024/03/kung-fu-panda-4-1.jpg",
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
+      body: pages[_selectedPageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        currentIndex: _selectedPageIndex,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
         ],
       ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Image.network(
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXQrpJH5YofrmGgo0Ct_wDyYu36LzTwZKADw&s",
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        CachedNetworkImage(
+          imageUrl:
+              "https://www.nbc.com/sites/nbcblog/files/styles/scale_600/public/2024/03/kung-fu-panda-4-1.jpg",
+          placeholder: (context, url) => CircularProgressIndicator(),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
+      ],
+    );
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Image.network(
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfFxKxCy7pjkfI4WUjmEJ_JIVUj3yvi_WUbA&s",
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        CachedNetworkImage(
+          imageUrl:
+              "https://d.newsweek.com/en/full/2068100/baymax.jpg?w=1600&h=1600&q=88&f=0b4a50f6f8158fe4f22bfd2328113de6",
+          placeholder: (context, url) => CircularProgressIndicator(),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
+      ],
     );
   }
 }
