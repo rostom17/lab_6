@@ -19,6 +19,27 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: ListView(
           children: [
+            DrawerHeader(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                colors: [
+                  Colors.deepPurple.shade400,
+                  Colors.deepPurple.shade900,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )),
+              child: const Row(
+                children: [
+                  Icon(Icons.fastfood),
+                  SizedBox(
+                    width: 18,
+                  ),
+                  Text('Cooking Up!'),
+                ],
+              ),
+            ),
             ListTile(
               title: Text("Recent"),
               leading: Icon(Icons.alarm),
